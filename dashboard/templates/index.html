@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Monitoring Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+        }
+
+        .graph {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>CPU Monitoring Dashboard</h1>
+
+        <div class="stats">
+            <div class="stat">
+                <h3>Average CPU</h3>
+                <p>{{ "%.2f"|format(stats.mean) }}%</p>
+            </div>
+            <div class="stat">
+                <h3>Min CPU</h3>
+                <p>{{ "%.2f"|format(stats.min) }}%</p>
+            </div>
+            <div class="stat">
+                <h3>Max CPU</h3>
+                <p>{{ "%.2f"|format(stats.max) }}%</p>
+            </div>
+            <div class="stat">
+                <h3>Data Points</h3>
+                <p>{{ stats.count }}</p>
+            </div>
+        </div>
+
+        <div class="graph">
+            <img src="{{ graph }}" alt="CPU Utilization Graph">
+        </div>
+
+        <h2>Recent Data</h2>
+        <div class="table-container">
+            {{ table|safe }}
+        </div>
+    </div>
+</body>
+
+</html>
